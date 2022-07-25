@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import TodoList from "./TODO/TodoList"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   let [items, setItems] = React.useState(
+      [
+         {id: 1, completed: true, title: "Spring"},
+         {id: 2, completed: false, title: "Hibernate"},
+         {id: 3, completed: false, title: "Docker"}
+      ]
+   )
+
+   function Toggle(id){
+      setItems(
+         items = items.map(item => {
+         if(item.id === id){
+            item.completed = !item.completed
+         }
+         return item
+      })
+      )
+   }
+
+ return <div className="wrapper">
+    <h1>Shceduler</h1>
+   <TodoList items = {items} onToggle={Toggle}></TodoList>
+ </div>
 }
 
-export default App;
+export default App
